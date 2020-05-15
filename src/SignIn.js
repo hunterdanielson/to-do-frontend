@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import request from 'superagent';
+import './Common.css'
 
 export default class SignIn extends Component {
     state = {
@@ -11,8 +12,8 @@ export default class SignIn extends Component {
         e.preventDefault();
         try {
 
-            const data = await request.post('http://localhost:3001/auth/signin', this.state)
-            this.props.handleTokenChange(data.body.token);
+            const data = await request.post('https://sleepy-earth-23861.herokuapp.com/auth/signin', this.state)
+            this.props.handleTokenChange(data.body.token, data.body.email);
             this.props.history.push('/quests');
         } catch {
             this.setState({ failure: 'login failed' })
@@ -39,7 +40,7 @@ export default class SignIn extends Component {
                     </label>
                     <input type='submit'></input>
                 </form>
-                {this.state.failure && <p>Invalid email/password combo</p>}
+                {this.state.failure && <p className='error'>Invalid email/password combo</p>}
 
                 
             </div>

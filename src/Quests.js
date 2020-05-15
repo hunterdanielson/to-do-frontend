@@ -6,7 +6,7 @@ export default class Quests extends Component {
     state = { quests: [] };
 
     componentDidMount = async() => {
-        const data = await request.get('http://localhost:3001/api/quests')
+        const data = await request.get('https://sleepy-earth-23861.herokuapp.com/api/quests')
         .set('Authorization', this.props.token);
         console.log(data)
         this.setState({ quests: data.body })
@@ -25,14 +25,14 @@ export default class Quests extends Component {
         e.preventDefault();
         
         // put the new quest onto the backend
-        await request.post('http://localhost:3001/api/quests', {
+        await request.post('https://sleepy-earth-23861.herokuapp.com/api/quests', {
             name: this.state.name,
             reward: this.state.reward
         })
         .set('Authorization', this.props.token)
 
         // grab the new questlist that should have the item above on it with set name and reward and other key/value pairs
-        const newData = await request.get('http://localhost:3001/api/quests')
+        const newData = await request.get('https://sleepy-earth-23861.herokuapp.com/api/quests')
         .set('Authorization', this.props.token)
 
         this.setState({ quests: newData.body })
@@ -41,18 +41,15 @@ export default class Quests extends Component {
     handleClick = async(id) => {
         console.log('id::::', id)
         // update the quest in backend
-        await request.put(`http://localhost:3001/api/quests/${id}`)
+        await request.put(`https://sleepy-earth-23861.herokuapp.com/api/quests/${id}`)
         .set('Authorization', this.props.token)
 
         // get new updated list from backend
-        const newData = await request.get('http://localhost:3001/api/quests')
+        const newData = await request.get('https://sleepy-earth-23861.herokuapp.com/api/quests')
         .set('Authorization', this.props.token)
 
         this.setState({ quests: newData.body })
     }
-
-    
-
 
     render() {
         console.log(this.state)

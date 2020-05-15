@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import request from 'superagent';
+import './Common.css';
 
 export default class SignUp extends Component {
     state = {
@@ -9,12 +10,16 @@ export default class SignUp extends Component {
 
     handleSubmit = async (e) => {
         e.preventDefault();
+        try {
 
-        const data = await request.post('http://localhost:3001/auth/signup', this.state)
-        console.log(data);
+            const data = await request.post('https://sleepy-earth-23861.herokuapp.com/auth/signup', this.state)
+            console.log(data.body)
+            this.props.handleTokenChange(data.body.token, data.body.email);
+            this.props.history.push('/quests');
+        } catch {
+            this.setState({ failure: 'error' })
+        }
 
-        this.props.handleTokenChange(data.body.token);
-        this.props.history.push('/quests');
     }
 
     handleChange = (e) => {
@@ -37,7 +42,7 @@ export default class SignUp extends Component {
                     </label>
                     <input type='submit'></input>
                 </form>
-
+                {this.state.failure && <p className='error'>Email already exists</p>}
                 
             </div>
         )

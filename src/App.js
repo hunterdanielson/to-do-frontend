@@ -11,11 +11,12 @@ import SignIn from './SignIn.js'
 import PrivateRoute from './PrivateRoute.js';
 
 export default class App extends Component {
-  state = { token: localStorage.getItem('TOKEN') }
+  state = { token: localStorage.getItem('TOKEN'), email: localStorage.getItem('EMAIL') }
 
-  handleTokenChange = (myToken) => {
-    this.setState({ token: myToken });
+  handleTokenChange = (myToken, myEmail) => {
+    this.setState({ token: myToken, email: myEmail });
     localStorage.setItem('TOKEN', myToken);
+    localStorage.setItem('EMAIL', myEmail);
   }
 
   render() {
@@ -23,7 +24,7 @@ export default class App extends Component {
       <div>
         <Router>
           <ul>
-            { this.state.token && <div>Welcome, user!!!</div> }
+    { this.state.token && <div>Logged in: {this.state.email}</div> }
             { this.state.token && <Link to="/quests"><div>Quests</div></Link> }
             <Link to="/signin"><div>Sign in</div></Link>
             <Link to="/signup"><div>Sign up</div></Link>
