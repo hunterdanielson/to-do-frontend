@@ -14,7 +14,7 @@ export default class SignUp extends Component {
         console.log(data);
 
         this.props.handleTokenChange(data.body.token);
-        this.props.history.push('/todos');
+        this.props.history.push('/quests');
     }
 
     handleChange = (e) => {

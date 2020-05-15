@@ -9,12 +9,14 @@ export default class SignIn extends Component {
 
     handleSubmit = async (e) => {
         e.preventDefault();
+        try {
 
-        const data = await request.post('http://localhost:3001/auth/signin', this.state)
-        console.log(data);
-
-        this.props.handleTokenChange(data.body.token);
-        this.props.history.push('/todos');
+            const data = await request.post('http://localhost:3001/auth/signin', this.state)
+            this.props.handleTokenChange(data.body.token);
+            this.props.history.push('/quests');
+        } catch {
+            this.setState({ failure: 'login failed' })
+        }
     }
 
     handleChange = (e) => {
@@ -25,7 +27,7 @@ export default class SignIn extends Component {
         console.log(this.state)
         return (
             <div>
-                <h1>Sign Ip</h1>
+                <h1>Sign In</h1>
                 <form onSubmit={this.handleSubmit}>
                     <label>
                         Email 
@@ -37,6 +39,7 @@ export default class SignIn extends Component {
                     </label>
                     <input type='submit'></input>
                 </form>
+                {this.state.failure && <p>Invalid email/password combo</p>}
 
                 
             </div>

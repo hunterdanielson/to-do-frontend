@@ -5,10 +5,10 @@ import {
     Switch,
     Link,
 } from "react-router-dom";
-// import Todos from './Todos.js';
+import Quests from './Quests.js';
 import SignUp from './SignUp.js'
 import SignIn from './SignIn.js'
-// import PrivateRoute from './PrivateRoute.js';
+import PrivateRoute from './PrivateRoute.js';
 
 export default class App extends Component {
   state = { token: localStorage.getItem('TOKEN') }
@@ -24,7 +24,7 @@ export default class App extends Component {
         <Router>
           <ul>
             { this.state.token && <div>Welcome, user!!!</div> }
-            { this.state.token && <Link to="/todos"><div>Todos</div></Link> }
+            { this.state.token && <Link to="/quests"><div>Quests</div></Link> }
             <Link to="/signin"><div>Sign in</div></Link>
             <Link to="/signup"><div>Sign up</div></Link>
             <button onClick={() =>this.handleTokenChange('')}>Logout</button>
@@ -40,12 +40,12 @@ export default class App extends Component {
                 handleTokenChange={this.handleTokenChange} 
                 {...routerProps}/>} 
               />
-            {/* <PrivateRoute 
+            <PrivateRoute 
               exact 
-              path='/todos' 
+              path='/quests' 
               token={this.state.token} 
-              render={(routerProps) => <Todos 
-              {...routerProps} />} /> */}
+              render={(routerProps) => <Quests
+              {...routerProps} />} />
           </Switch>
         </Router>
       </div>
