@@ -2,3 +2,7 @@
     color: red;
     font-weight: bolder;
 }
+
+.loggedin {
+    font-size: larger;
+}

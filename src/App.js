@@ -9,6 +9,7 @@ import Quests from './Quests.js';
 import SignUp from './SignUp.js'
 import SignIn from './SignIn.js'
 import PrivateRoute from './PrivateRoute.js';
+import './Common.css';
 
 export default class App extends Component {
   state = { token: localStorage.getItem('TOKEN'), email: localStorage.getItem('EMAIL') }
@@ -24,7 +25,7 @@ export default class App extends Component {
       <div>
         <Router>
           <ul>
-    { this.state.token && <div>Logged in: {this.state.email}</div> }
+    { this.state.token && <div className="loggedin">Logged in: {this.state.email}</div> }
             { this.state.token && <Link to="/quests"><div>Quests</div></Link> }
             <Link to="/signin"><div>Sign in</div></Link>
             <Link to="/signup"><div>Sign up</div></Link>
