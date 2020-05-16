@@ -62,7 +62,7 @@ export default class Quests extends Component {
                     </label>
                     <label>
                         Add Reward
-                        <input onChange={this.handleChange} name='reward' />
+                        <input onChange={this.handleChange} name='reward' type='number' />
                     </label>
                     <button>Add</button>
                 </form>
